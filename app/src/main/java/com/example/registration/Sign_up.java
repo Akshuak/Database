@@ -10,11 +10,18 @@ import android.os.Bundle;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputLayout;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.List;
 
 import static com.example.registration.Database.COLUMN_CONPASSWORD;
 import static com.example.registration.Database.COLUMN_EMAIL;
@@ -26,10 +33,16 @@ public class Sign_up extends AppCompatActivity implements View.OnClickListener {
 
     SQLiteDatabase sqLiteDatabase;
     Database storeDatabase;
+    List<String> list = new ArrayList<String>();
 
     TextInputLayout up_username,up_email,up_password,up_confirmPassword;
     TextView tv_signIn;
-    Button btn_signUP;
+    Button btn_signUP, Saqtau;
+    Spinner groupSpinner;
+    CheckBox chekiya, chekzhok;
+
+
+    private String [] professions = {"Audarma isi","Tehnik programist", "Pedogog","Esep-audit", "Menedgment", "Marketing"};
 
     @Override
     protected void onCreate( Bundle savedInstanceState ) {
@@ -37,16 +50,36 @@ public class Sign_up extends AppCompatActivity implements View.OnClickListener {
         setContentView(R.layout.activity_sign_up);
 
         btn_signUP = findViewById(R.id.btn_signUP);
+        groupSpinner= findViewById(R.id.groupSpinner);
+        list.add("Audarma isi");
+        list.add("Tehnik programist");
+        list.add( "Pedogog");
+        list.add("Esep-audit");
+        list.add( "Menedgment");
+        list.add( "Marketing");
+
+        btn_signUP.setOnClickListener(this);
+        tv_signIn.setOnClickListener(this);
+        storeDatabase = new Database(this);
+        sqLiteDatabase = storeDatabase.getWritableDatabase();
+
+
 
         up_username = findViewById(R.id.up_username);
         up_email = findViewById(R.id.up_email);
         up_password = findViewById(R.id.up_password);
         up_confirmPassword = findViewById(R.id.up_confirmPassord);
 
-        btn_signUP.setOnClickListener(this);
-        tv_signIn.setOnClickListener(this);
-        storeDatabase = new Database(this);
-        sqLiteDatabase = storeDatabase.getWritableDatabase();
+        chekiya = findViewById(R.id.chekiya);
+        chekzhok = findViewById(R.id.chekzhok);
+        Saqtau = findViewById(R.id.saqtau);
+
+
+
+
+        ArrayAdapter<String> professionsAdapter = new ArrayAdapter<>(this,
+                                android.R.layout.item_1, professions);
+    groupSpinner.setAdapter(professionsAdapter);
 
     }
 
@@ -92,6 +125,21 @@ public class Sign_up extends AppCompatActivity implements View.OnClickListener {
                 break;
 
         }
+        {
+
+            if(chekiya.isChecked()) {
+                Saqtau.add("Qalaimyn/iya");
+            } else {
+                Saqtau.remove("Qalaimyn/iya");
+            }
+
+        }
+        {
+            if(chekiya.isChecked()) {
+                Saqtau.add("Qalamaimyn/zhok");
+            } else
+                Saqtau.remove("Qalamaimyn/zhok");
+        }
     }
 
     public void showDatabaseData(){
@@ -108,9 +156,12 @@ public class Sign_up extends AppCompatActivity implements View.OnClickListener {
                 Log.i("Database","email:"+email);
                 Log.i("Database","password:"+password);
                 Log.i("Database","conPassword:"+conPassword);
+
+
             }
 
         }
+
 
 
 

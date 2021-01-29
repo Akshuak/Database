@@ -81,6 +81,42 @@
                 android:inputType="textPassword"
                 android:layout_height="wrap_content"/>
         </com.google.android.material.textfield.TextInputLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Мамандық таңдау:"
+            android:textSize="25dp"/>
+
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:id="@+id/mamandyq"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Жатақханада қалуды:"
+            android:textAppearance="@style/Theme.AppCompat"
+            android:textSize="25dp"/>
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Qalaimyn/iya"
+            android:id="@+id/chekiya"
+            />
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Qalamaimyn/zhok"
+            android:id="@+id/chekzhok"
+            />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Saqtau"
+            android:id="@+id/saqtau"/>
+
+
         <Button
             android:layout_width="150dp"
             android:layout_height="60dp"
